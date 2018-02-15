@@ -1,13 +1,13 @@
 <template>
-  <v-container grid-list-md>
-    <hr>
-    <v-layout v-for="menu in menus" :key="menu.id">
+  <v-card>
+  <v-container fluid grid-list-md>
+    <v-layout v-for="menu in menus" :key="menu.id" row>
       <v-flex xs6 sm6>
         <v-card>
           <v-card-media
             class="white--text"
             height="200px"
-            src="/static/images/almuerzo.jpg"
+            :src = "menu.almuerzo.imagen"
           >
             <v-container fill-height fluid>
               <v-layout fill-height>
@@ -59,9 +59,9 @@
           </v-card-actions>
         </v-card>
       </v-flex>
-
     </v-layout>
   </v-container>
+</v-card>
 </template>
 
 <script>
