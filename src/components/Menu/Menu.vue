@@ -47,12 +47,9 @@
 </template>
 
 <script>
-  import axios from 'axios'
-
-
   export default {
-    created: function(){
-      this.getActualWeek();
+    created: function () {
+      this.getActualWeek()
     },
     data: () => ({
       fechaMin: '',
@@ -62,7 +59,6 @@
       almuerzoRules: [
         v => !!v || 'Debes ingresar un almuerzo'
       ],
-      valid: true,
       cena: '',
       cenaRules: [
         v => !!v || 'Debes ingresar una cena'
@@ -70,17 +66,17 @@
     }),
 
     methods: {
-      getActualWeek: function(){
-        var curr = new Date; // get current date
-        var first = curr.getDate() - curr.getDay() +1; // First day is the day of the month - the day of the week
-        var last = first + 5; // last day is the first day + 6
+      getActualWeek: function () {
+        var curr = new Date() // get current date
+        var first = curr.getDate() - curr.getDay() + 1 // First day is the day of the month - the day of the week
+        var last = first + 5 // last day is the first day + 6
 
-        var firstday = new Date(curr.setDate(first)).toISOString();
-        var lastday = new Date(curr.setDate(last)).toISOString();
-        firstday = firstday.split('T').shift();
-        lastday = lastday.split('T').shift();
-        this.fechaMin = firstday;
-        this.fechaMax = lastday;
+        var firstday = new Date(curr.setDate(first)).toISOString()
+        var lastday = new Date(curr.setDate(last)).toISOString()
+        firstday = firstday.split('T').shift()
+        lastday = lastday.split('T').shift()
+        this.fechaMin = firstday
+        this.fechaMax = lastday
       },
       submit () {
         if (this.$refs.form.validate()) {
