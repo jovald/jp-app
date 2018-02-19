@@ -23,5 +23,6 @@ export default new Router({
       name: 'Menu',
       component: Menu
     }
-  ]
+  ],
+  mode: 'history'
 })
