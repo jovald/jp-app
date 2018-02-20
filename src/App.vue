@@ -1,29 +1,25 @@
 <template>
   <v-app id="inspire">
+
     <v-navigation-drawer
       fixed
       v-model="drawer"
       app
     >
       <v-list dense>
-        <v-list-tile @click="">
+
+        <v-list-tile v-for="item in menuItems" :key="item.title" :to="item.link">
           <v-list-tile-action>
-            <v-icon>home</v-icon>
+            <v-icon> {{ item.icon }} </v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
+            <v-list-tile-title> {{ item.title }} </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="">
-          <v-list-tile-action>
-            <v-icon>contact_mail</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Contact</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+
       </v-list>
     </v-navigation-drawer>
+
     <v-toolbar color="indigo" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Application</v-toolbar-title>
@@ -40,7 +36,11 @@
 <script>
   export default {
     data: () => ({
-      drawer: null
+      drawer: null,
+      menuItems: [
+        { icon: 'featured_play_list', title: 'Menú Semanal', link: '/menus' },
+        { icon: 'work', title: 'Administrar Menús', link: '/menu' }
+      ]
     }),
     props: {
       source: String
