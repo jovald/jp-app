@@ -37,8 +37,15 @@
                 v-model="fecha"
                 v-bind:min="fechaMin"
                 v-bind:max="fechaMax"
-                required
               ></v-date-picker>
+
+              <v-alert
+                type="warning"
+                :value="status"
+                transition="scale-transition"
+              >
+                No hay fecha.
+              </v-alert>
 
               <v-card-actions>
                 <v-btn
@@ -112,6 +119,7 @@
       this.getActualWeek()
     },
     data: () => ({
+      status: false,
       fecha: '',
       fechaMin: '',
       fechaMax: '',
@@ -154,10 +162,15 @@
       },
       submit () {
         if (this.$refs.form.validate()) {
-          console.log(this.almuerzo);
           var item = {almuerzo: this.almuerzo, cena: this.cena, fecha: this.fecha}
-          console.log(item);
-          this.items.push(item)
+          if (item.fecha !== '') {
+            this.items.push(item)
+          }
+          else {
+            console.log(status)
+            status = true
+          }
+
           // Native form submission is not yet supported
 
         }
