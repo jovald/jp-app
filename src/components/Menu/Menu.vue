@@ -2,7 +2,11 @@
     <v-container fluid>
 
       <v-card>
+        <v-card-title primary-title>
+              <div class="headline">Administrar Menús</div>
+            </v-card-title>
         <v-card-actions>
+
           <v-container>
 
             <v-form v-model="valid" ref="form" lazy-validation>
@@ -58,6 +62,7 @@
       this.getActualWeek()
     },
     data: () => ({
+      picker: '',
       fechaMin: '',
       fechaMax: '',
       valid: true,
