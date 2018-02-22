@@ -26,7 +26,7 @@
           <v-card-actions>
             <v-btn
             block v-bind:class="{ green: menu.almuerzo.activo, 'white--text': menu.almuerzo.activo }"
-            v-on:click="cambiarEstadoMenu(menu.almuerzo)"
+            @click="cambiarEstadoMenu(menu.almuerzo)"
             >Almozaré</v-btn>
           </v-card-actions>
         </v-card>
@@ -57,7 +57,7 @@
           <v-card-actions>
             <v-btn
             block v-bind:class="{ green: menu.cena.activo, 'white--text': menu.cena.activo}"
-            v-on:click="cambiarEstadoMenu(menu.cena)"
+            @click="cambiarEstadoMenu(menu.cena)"
             >Cenaré</v-btn>
           </v-card-actions>
         </v-card>

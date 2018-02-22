@@ -24,8 +24,37 @@ export const store = new Vuex.Store({
       registeredMenus: ['1']
     }
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    createMenu (state, payload) {
+      state.loadedMenus.push(payload)
+    },
+    deleteMenu (state, payload) {
+      state.loadedMenus.splice(state.loadedMenus.indexOf(payload), 1)
+    }
+  },
+  actions: {
+    createMenu ({commit}, payload) {
+      const menu = {
+        almuerzo: {
+          titulo: payload.almuerzo.titulo,
+          imagen: '/static/images/cena.jpg',
+          activo: false
+        },
+        cena: {
+          titulo: payload.cena.titulo,
+          imagen: '/static/images/cena.jpg',
+          activo: false
+        },
+        fecha: payload.fecha,
+        id: 'sadfghdfgdhfg12'
+      }
+      // Reach to firebase and store it
+      commit('createMenu', menu)
+    },
+    deleteMenu ({commit}, payload) {
+      commit('deleteMenu', payload)
+    }
+  },
   getters: {
     loadedMenus (state) {
       return state.loadedMenus.sort((menuA, menuB) => {

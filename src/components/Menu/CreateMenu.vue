@@ -13,13 +13,20 @@
 
           <v-container>
 
-            <v-form v-model="valid" ref="form" lazy-validation>
+            <v-form
+              v-model="valid"
+              ref="form"
+              lazy-validation
+              @submit.prevent="submit"
+            >
+
               <v-text-field
                 label="Almuerzo"
                 v-model="almuerzo"
                 :rules="almuerzoRules"
                 required
               ></v-text-field>
+
               <v-text-field
                 label="Cena"
                 v-model="cena"
@@ -34,29 +41,29 @@
                 :first-day-of-week="1"
                 locale="es-cl"
                 v-model="fecha"
-                v-bind:min="fechaMin"
-                v-bind:max="fechaMax"
+                :min="fechaMin"
+                :max="fechaMax"
                 @input="validDate"
               ></v-date-picker>
 
-              <!--<v-alert
+              <v-alert
                 type="error"
                 :value="status"
                 transition="scale-transition"
               >
-                No hay fecha.
-              </v-alert> -->
+                Debes ingresar una fecha valida
+              </v-alert>
 
               <v-card-actions>
                 <v-btn
-                  @click="submit"
                   :disabled="!valid"
                   color="primary"
+                  type="submit"
                 >
                   Agregar
                 </v-btn>
                 <v-btn
-                  v-on:click="clear()"
+                  @click="clear()"
                   flat
                 >Borrar</v-btn>
               </v-card-actions>
@@ -161,12 +168,13 @@
       },
       submit () {
         if (this.$refs.form.validate() && this.validDate()) {
-          var menu = {
-            almuerzo: { titulo: this.almuerzo, imagen: '/static/images/almuerzo.jpg', activo: false },
-            cena: { titulo: this.cena, imagen: '/static/images/cena.jpg', activo: false },
+          const menu = {
+            almuerzo: { titulo: this.almuerzo },
+            cena: { titulo: this.cena },
             fecha: this.fecha
           }
-          this.menus.push(menu)
+          // this.menus.push(menu)
+          this.$store.dispatch('createMenu', menu)
           this.clear()
         }
       },
@@ -174,12 +182,13 @@
         this.$refs.form.reset()
         this.datePickerColor = 'indigo'
         this.fecha = ''
-        if(this.status == true){
+        if (this.status === true) {
           this.status = false
         }
       },
       deleting (menu) {
-        this.menus.splice(this.menus.indexOf(menu), 1)
+        // this.menus.splice(this.menus.indexOf(menu), 1)
+        this.$store.dispatch('deleteMenu', menu)
       },
       validDate () {
         // Valida que exista fecha
