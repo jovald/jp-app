@@ -41,7 +41,7 @@
 
               <v-alert
                 type="error"
-                :value="!valid"
+                :value="status"
                 transition="scale-transition"
               >
                 No hay fecha.
@@ -56,7 +56,7 @@
                   Agregar
                 </v-btn>
                 <v-btn
-                  @click="clear"
+                  v-on:click="clear()"
                   flat
                 >Borrar</v-btn>
               </v-card-actions>
@@ -171,18 +171,23 @@
         this.$refs.form.reset()
         this.datePickerColor = 'indigo'
         this.fecha = ''
+        if(this.status == true){
+          this.status = false
+        }
       },
       deleting (item) {
         this.items.splice(this.items.indexOf(item), 1)
       },
       validDate () {
         // Valida que exista fecha
-        if (this.fecha == '') {
+        if (this.fecha === '') {
           this.datePickerColor = 'red'
           this.valid = false
+          this.status = true
           return false
         } else {
           this.valid = true
+          this.status = false
           this.datePickerColor = 'indigo'
           return true
         }
