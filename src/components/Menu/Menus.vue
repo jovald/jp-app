@@ -1,6 +1,7 @@
 <template>
 
   <v-container fluid grid-list-lg style="min-heigth:0">
+    
     <v-layout row wrap>
       <v-flex xs12 md6 v-for="item in generalData" :key="item.title">
         <meal-card
@@ -80,7 +81,7 @@
 </template>
 
 <script>
-  import MealCard from '@/components/MealCards'
+  import MealCard from '@/components/Menu/MealCards'
 
   export default {
     data: () => ({
