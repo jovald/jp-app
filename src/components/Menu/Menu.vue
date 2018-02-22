@@ -1,6 +1,5 @@
 <template>
     <v-container fluid grid-list-lg>
-
       <v-layout wrap>
 
 
@@ -170,7 +169,7 @@
       },
       validDate () {
         // Valida que exista fecha
-        if (!this.date) {
+        if (!this.fecha) {
           this.datePickerColor = 'red'
           this.valid = false
           return false
