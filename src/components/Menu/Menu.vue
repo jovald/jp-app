@@ -39,6 +39,14 @@
                 @input="validDate"
               ></v-date-picker>
 
+              <v-alert
+                type="error"
+                :value="!valid"
+                transition="scale-transition"
+              >
+                No hay fecha.
+              </v-alert>
+
               <v-card-actions>
                 <v-btn
                   @click="submit"
