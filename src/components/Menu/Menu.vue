@@ -16,13 +16,13 @@
             <v-form v-model="valid" ref="form" lazy-validation>
               <v-text-field
                 label="Almuerzo"
-                :v-model="almuerzo"
+                v-model="almuerzo"
                 :rules="almuerzoRules"
                 required
               ></v-text-field>
               <v-text-field
                 label="Cena"
-                :v-model="cena"
+                v-model="cena"
                 :rules="cenaRules"
                 required
               ></v-text-field>
@@ -36,6 +36,7 @@
                 v-model="fecha"
                 v-bind:min="fechaMin"
                 v-bind:max="fechaMax"
+                @input="validDate"
               ></v-date-picker>
 
               <v-card-actions>
@@ -153,8 +154,7 @@
         this.fechaMax = lastday
       },
       submit () {
-        this.validDate()
-        if (this.$refs.form.validate()) {
+        if (this.$refs.form.validate() && this.validDate()) {
           var item = {almuerzo: this.almuerzo, cena: this.cena, fecha: this.fecha}
           this.items.push(item)
         }
@@ -169,10 +169,14 @@
       },
       validDate () {
         // Valida que exista fecha
-        if (!this.fecha) {
+        if (this.fecha == '') {
           this.datePickerColor = 'red'
           this.valid = false
           return false
+        } else {
+          this.valid = true
+          this.datePickerColor = 'indigo'
+          return true
         }
       }
     }
