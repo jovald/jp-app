@@ -69,22 +69,7 @@
 
 <script>
   export default {
-    data: () => ({
-      menus: [
-        {
-          id: 1,
-          almuerzo: { titulo: 'Lentejas', imagen: '/static/images/almuerzo.jpg', activo: true },
-          cena: { titulo: 'Pollo con arroz arabe', imagen: '/static/images/cena.jpg', activo: true },
-          fecha: '12/12/2018'
-        },
-        {
-          id: 2,
-          almuerzo: { titulo: 'Fideos con salsa', imagen: '/static/images/almuerzo.jpg', activo: false },
-          cena: { titulo: 'Caldito', imagen: '/static/images/cena.jpg', activo: false },
-          fecha: '13/12/2018'
-        }
-      ]
-    }),
+    data: () => ({}),
     methods: {
       cambiarEstadoMenu: function (comida) {
         if (comida.activo) {
@@ -92,6 +77,11 @@
         } else {
           comida.activo = true
         }
+      }
+    },
+    computed: {
+      menus () {
+        return this.$store.getters.loadedMenus
       }
     }
   }

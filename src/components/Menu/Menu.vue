@@ -39,13 +39,13 @@
                 @input="validDate"
               ></v-date-picker>
 
-              <v-alert
+              <!--<v-alert
                 type="error"
                 :value="!valid"
                 transition="scale-transition"
               >
                 No hay fecha.
-              </v-alert>
+              </v-alert> -->
 
               <v-card-actions>
                 <v-btn
@@ -74,7 +74,7 @@
 
       <v-data-table
         :headers="headers"
-        :items="items"
+        :items="menus"
         class="elevation-1"
       >
         <template slot="headerCell" slot-scope="props">
@@ -88,8 +88,8 @@
           </v-tooltip>
         </template>
         <template slot="items" slot-scope="props">
-          <td>{{ props.item.almuerzo }}</td>
-          <td>{{ props.item.cena }}</td>
+          <td>{{ props.item.almuerzo.titulo }}</td>
+          <td>{{ props.item.cena.titulo }}</td>
           <td>{{ props.item.fecha }}</td>
           <td>
             <v-btn
@@ -143,8 +143,7 @@
           value: 'Cena' },
         { text: 'Fecha', value: 'fecha' },
         { text: 'Editar/Eliminar', sortable: false, value: 'accion' }
-      ],
-      items: []
+      ]
     }),
 
     methods: {
@@ -162,8 +161,12 @@
       },
       submit () {
         if (this.$refs.form.validate() && this.validDate()) {
-          var item = {almuerzo: this.almuerzo, cena: this.cena, fecha: this.fecha}
-          this.items.push(item)
+          var menu = {
+            almuerzo: { titulo: this.almuerzo, imagen: '/static/images/almuerzo.jpg', activo: false },
+            cena: { titulo: this.cena, imagen: '/static/images/cena.jpg', activo: false },
+            fecha: this.fecha
+          }
+          this.menus.push(menu)
           this.clear()
         }
       },
@@ -172,12 +175,12 @@
         this.datePickerColor = 'indigo'
         this.fecha = ''
       },
-      deleting (item) {
-        this.items.splice(this.items.indexOf(item), 1)
+      deleting (menu) {
+        this.menus.splice(this.menus.indexOf(menu), 1)
       },
       validDate () {
         // Valida que exista fecha
-        if (this.fecha == '') {
+        if (this.fecha === '') {
           this.datePickerColor = 'red'
           this.valid = false
           return false
@@ -186,6 +189,12 @@
           this.datePickerColor = 'indigo'
           return true
         }
+      }
+    },
+
+    computed: {
+      menus () {
+        return this.$store.getters.loadedMenus
       }
     }
 
