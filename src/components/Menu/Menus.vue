@@ -1,5 +1,17 @@
 <template>
-  <v-container fluid grid-list-md>
+
+  <v-container fluid grid-list-lg style="min-heigth:0">
+    <v-layout row wrap>
+      <v-flex xs12 md6 v-for="item in generalData" :key="item.title">
+        <meal-card
+          :tipo ="item.tipo"
+          :title="item.title"
+          :value="item.value"
+        ></meal-card>
+      </v-flex>
+    </v-layout>
+
+
     <v-layout v-for="menu in menus" v-bind:key="menu.id" row wrap>
 
       <v-flex xs12 sm6>
@@ -68,8 +80,19 @@
 </template>
 
 <script>
+  import MealCard from '@/components/MealCards'
+
   export default {
-    data: () => ({}),
+    data: () => ({
+
+      generalData: [
+          { title: 'Lentejas', value: '01/02/2018', tipo: 'Almuerzo' },
+          { title: 'Caldito', value: '01/02/2018', tipo: 'Cena' }
+      ]
+    }),
+    components: {
+      MealCard
+    },
     methods: {
       cambiarEstadoMenu: function (comida) {
         if (comida.activo) {
