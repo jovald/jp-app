@@ -17,13 +17,13 @@
             <v-form v-model="valid" ref="form" lazy-validation>
               <v-text-field
                 label="Almuerzo"
-                v-model="almuerzo"
+                :v-model="almuerzo"
                 :rules="almuerzoRules"
                 required
               ></v-text-field>
               <v-text-field
                 label="Cena"
-                v-model="cena"
+                :v-model="cena"
                 :rules="cenaRules"
                 required
               ></v-text-field>
@@ -31,21 +31,13 @@
               <v-date-picker
                 full-width
                 class="mt-3"
-                color="red darken-1"
+                :color="datePickerColor"
                 :first-day-of-week="1"
                 locale="es-cl"
                 v-model="fecha"
                 v-bind:min="fechaMin"
                 v-bind:max="fechaMax"
               ></v-date-picker>
-
-              <v-alert
-                type="warning"
-                :value="status"
-                transition="scale-transition"
-              >
-                No hay fecha.
-              </v-alert>
 
               <v-card-actions>
                 <v-btn
@@ -95,7 +87,8 @@
             <v-btn
               @click="deleting(props.item)"
               :disabled="!valid"
-              color="primary"
+              color="indigo"
+              dark
             >
             Eliminar
             </v-btn>
@@ -125,6 +118,7 @@
       fechaMax: '',
       valid: true,
       almuerzo: '',
+      datePickerColor: 'indigo',
       almuerzoRules: [
         v => !!v || 'Debes ingresar un almuerzo'
       ],
@@ -134,17 +128,16 @@
       ],
 
       headers: [
-          {
-            text: 'Almuerzo',
-            value: 'almuerzo'
-          },
-          { text: 'Cena',
-            value: 'Cena' },
-          { text: 'Fecha', value: 'fecha' },
-          { text: 'Editar/Eliminar', sortable: false, value: 'accion' }
-        ],
-        items: []
-
+        {
+          text: 'Almuerzo',
+          value: 'almuerzo'
+        },
+        { text: 'Cena',
+          value: 'Cena' },
+        { text: 'Fecha', value: 'fecha' },
+        { text: 'Editar/Eliminar', sortable: false, value: 'accion' }
+      ],
+      items: []
     }),
 
     methods: {
@@ -161,27 +154,29 @@
         this.fechaMax = lastday
       },
       submit () {
+        this.validDate()
         if (this.$refs.form.validate()) {
           var item = {almuerzo: this.almuerzo, cena: this.cena, fecha: this.fecha}
-          if (item.fecha !== '') {
-            this.items.push(item)
-          }
-          else {
-            console.log(status)
-            status = true
-          }
-
-          // Native form submission is not yet supported
-
+          this.items.push(item)
         }
       },
       clear () {
         this.$refs.form.reset()
+        this.datePickerColor = 'indigo'
+        this.fecha = ''
       },
       deleting (item) {
         this.items.splice(this.items.indexOf(item), 1)
+      },
+      validDate () {
+        // Valida que exista fecha
+        if (!this.date) {
+          this.datePickerColor = 'red'
+          this.valid = false
+          return false
+        }
       }
-
     }
+
   }
 </script>
