@@ -86,7 +86,6 @@
           <td>
             <v-btn
               @click="deleting(props.item)"
-              :disabled="!valid"
               color="indigo"
               dark
             >
@@ -157,6 +156,7 @@
         if (this.$refs.form.validate() && this.validDate()) {
           var item = {almuerzo: this.almuerzo, cena: this.cena, fecha: this.fecha}
           this.items.push(item)
+          this.clear()
         }
       },
       clear () {
