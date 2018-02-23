@@ -1,18 +1,26 @@
 <template>
 
   <v-container fluid grid-list-lg style="min-heigth:0">
-    
+
     <v-layout row wrap>
-      <v-flex xs12 md6 v-for="item in generalData" :key="item.title">
+      <v-flex xs12 md6 v-for="menu in menus" :key="menu.id">
         <meal-card
-          :tipo ="item.tipo"
-          :title="item.title"
-          :value="item.value"
+          :tipo ="'Amlmuerzo'"
+          :title="menu.almuerzo.titulo"
+          :value="menu.value"
+          class="mb-2"
+        ></meal-card>
+        <meal-card
+          :tipo ="'Cena'"
+          :title="menu.cena.titulo"
+          :value="menu.value"
+          class="mb-2"
         ></meal-card>
       </v-flex>
     </v-layout>
 
 
+<!--
     <v-layout v-for="menu in menus" v-bind:key="menu.id" row wrap>
 
       <v-flex xs12 sm6>
@@ -76,6 +84,8 @@
         </v-card>
       </v-flex>
     </v-layout>
+
+  -->
   </v-container>
 
 </template>
@@ -85,15 +95,11 @@
 
   export default {
     data: () => ({
-
       generalData: [
           { title: 'Lentejas', value: '01/02/2018', tipo: 'Almuerzo' },
           { title: 'Caldito', value: '01/02/2018', tipo: 'Cena' }
       ]
     }),
-    components: {
-      MealCard
-    },
     methods: {
       cambiarEstadoMenu: function (comida) {
         if (comida.activo) {
@@ -107,6 +113,9 @@
       menus () {
         return this.$store.getters.loadedMenus
       }
-    }
+    },
+    components: {
+      MealCard
+    },
   }
 </script>
