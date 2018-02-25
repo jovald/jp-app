@@ -3,6 +3,7 @@
   <v-container fluid fill-height>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
+        <app-alert v-if="error" @dismissed="onDismissed" :text="error.message"></app-alert>
         <v-card class="elevation-12">
           <v-toolbar dark color="indigo">
             <v-toolbar-title>Sign Up form</v-toolbar-title>
@@ -52,7 +53,7 @@
             <v-spacer></v-spacer>
             <v-btn
               :disabled="!valid"
-              :loading="loading"
+              :loading="this.$store.getters.loading"
               @click="onSignup"
               color="primary"
             >
@@ -76,8 +77,7 @@
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
       ],
       password: '',
-      confirmPassword: '',
-      loading: false
+      confirmPassword: ''
     }),
     methods: {
       onSignup () {
@@ -87,6 +87,9 @@
         } else {
           this.loading = false
         }
+      },
+      onDismissed () {
+        this.$store.dispatch('clearError')
       }
     },
     watch: {
@@ -102,7 +105,11 @@
       },
       user () {
         return this.$store.getters.user
+      },
+      error () {
+        return this.$store.getters.error
       }
+      // // Produces an error putting the loading state data as a computed property
     }
   }
 </script>
