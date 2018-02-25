@@ -116,6 +116,6 @@
     },
     components: {
       MealCard
-    },
+    }
   }
 </script>

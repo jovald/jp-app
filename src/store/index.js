@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as firebase from 'firebase'
 
 Vue.use(Vuex)
 
@@ -19,10 +20,7 @@ export const store = new Vuex.Store({
         fecha: '2018-2-21'
       }
     ],
-    user: {
-      id: 'adsfdgfhg12',
-      registeredMenus: ['1']
-    }
+    user: null
   },
   mutations: {
     createMenu (state, payload) {
@@ -30,6 +28,9 @@ export const store = new Vuex.Store({
     },
     deleteMenu (state, payload) {
       state.loadedMenus.splice(state.loadedMenus.indexOf(payload), 1)
+    },
+    setUser (state, payload) {
+      state.user = payload
     }
   },
   actions: {
@@ -53,6 +54,40 @@ export const store = new Vuex.Store({
     },
     deleteMenu ({commit}, payload) {
       commit('deleteMenu', payload)
+    },
+    signUserUp ({commit}, payload) {
+      firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+        .then(
+          user => {
+            const newUser = {
+              id: user.uid,
+              registeredMenus: []
+            }
+            commit('setUser', newUser)
+          }
+        )
+        .catch(
+          error => {
+            console.log(error)
+          }
+        )
+    },
+    signUserIn ({commit}, payload) {
+      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+        .then(
+          user => {
+            const newUser = {
+              id: user.uid,
+              registeredMenus: []
+            }
+            commit('setUser', newUser)
+          }
+        )
+        .catch(
+          error => {
+            console.log(error)
+          }
+        )
     }
   },
   getters: {
@@ -67,6 +102,9 @@ export const store = new Vuex.Store({
           return menu.id === menuId
         })
       }
+    },
+    user (state) {
+      return state.user
     }
   }
 })
