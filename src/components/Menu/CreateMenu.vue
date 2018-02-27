@@ -21,18 +21,22 @@
             >
 
               <v-text-field
-                label="Almuerzo"
-                v-model="almuerzo"
+                label="Comida"
+                v-model="titulo"
                 :rules="almuerzoRules"
                 required
               ></v-text-field>
 
-              <v-text-field
-                label="Cena"
-                v-model="cena"
-                :rules="cenaRules"
+
+              <v-select
+                :items="tipoComida"
+                v-model="tipo"
+                label="Tipo de comida"
+                single-line
+                bottom
+                :rules="[v => !!v || 'Item is required']"
                 required
-              ></v-text-field>
+              ></v-select>
 
               <v-date-picker
                 full-width
@@ -95,8 +99,8 @@
           </v-tooltip>
         </template>
         <template slot="items" slot-scope="props">
-          <td>{{ props.item.almuerzo.titulo }}</td>
-          <td>{{ props.item.cena.titulo }}</td>
+          <td>{{ props.item.titulo }}</td>
+          <td >{{ props.item.tipo }}</td>
           <td>{{ props.item.fecha }}</td>
           <td>
             <v-btn
@@ -131,7 +135,8 @@
       fechaMin: '',
       fechaMax: '',
       valid: true,
-      almuerzo: '',
+      tipo: null,
+      titulo: '',
       datePickerColor: 'indigo',
       almuerzoRules: [
         v => !!v || 'Debes ingresar un almuerzo'
@@ -140,14 +145,14 @@
       cenaRules: [
         v => !!v || 'Debes ingresar una cena'
       ],
-
+      tipoComida: ['almuerzo', 'cena'],
       headers: [
         {
-          text: 'Almuerzo',
-          value: 'almuerzo'
+          text: 'Titulo',
+          value: 'titulo'
         },
-        { text: 'Cena',
-          value: 'Cena' },
+        { text: 'Tipo',
+          value: 'tipo' },
         { text: 'Fecha', value: 'fecha' },
         { text: 'Editar/Eliminar', sortable: false, value: 'accion' }
       ]
@@ -168,13 +173,13 @@
       },
       submit () {
         if (this.$refs.form.validate() && this.validDate()) {
-          const menu = {
-            almuerzo: { titulo: this.almuerzo },
-            cena: { titulo: this.cena },
+          const comida = {
+            titulo: this.titulo,
+            tipo: this.tipo,
             fecha: this.fecha
           }
-          // this.menus.push(menu)
-          this.$store.dispatch('createMenu', menu)
+
+          this.$store.dispatch('createMenu', comida)
           this.clear()
         }
       },

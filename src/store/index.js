@@ -10,14 +10,12 @@ export const store = new Vuex.Store({
       {
         id: '1',
         titulo: 'Caldito',
-        imagen: '/static/images/cena.jpg',
         fecha: '2018-2-21',
         tipo: 'cena'
       },
       {
         id: '2',
         titulo: 'Fideos con salsa',
-        imagen: '/static/images/almuerzo.jpg',
         fecha: '2018-2-21',
         tipo: 'almuerzo'
       }
@@ -49,18 +47,10 @@ export const store = new Vuex.Store({
   actions: {
     createMenu ({commit}, payload) {
       const menu = {
-        almuerzo: {
-          titulo: payload.almuerzo.titulo,
-          imagen: '/static/images/cena.jpg',
-          activo: false
-        },
-        cena: {
-          titulo: payload.cena.titulo,
-          imagen: '/static/images/cena.jpg',
-          activo: false
-        },
+        id: 'adfa3edwd-23',
         fecha: payload.fecha,
-        id: 'sadfghdfgdhfg12'
+        tipo: payload.tipo,
+        titulo: payload.titulo
       }
       // Reach to firebase and store it
       commit('createMenu', menu)
