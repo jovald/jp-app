@@ -58,6 +58,7 @@ export const store = new Vuex.Store({
         })
     },
     createMenu ({commit}, payload) {
+      commit('setLoading', true)
       const menu = {
         fecha: payload.fecha,
         tipo: payload.tipo,
@@ -70,14 +71,25 @@ export const store = new Vuex.Store({
             ...menu,
             id: key
           })
+          commit('setLoading', false)
         })
         .catch((error) => {
+          commit('setLoading', false)
           console.log(error)
         })
       // Reach to firebase and store it
     },
     deleteMenu ({commit}, payload) {
-      commit('deleteMenu', payload)
+      commit('setLoading', true)
+      firebase.database().ref('menus').child(payload.id).remove()
+        .then((data) => {
+          commit('deleteMenu', payload)
+          commit('setLoading', false)
+        })
+        .catch((error) => {
+          console.log(error)
+          commit('setLoading', false)
+        })
     },
     signUserUp ({commit}, payload) {
       commit('setLoading', true)
