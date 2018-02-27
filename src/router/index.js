@@ -3,6 +3,9 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Menus from '@/components/Menu/Menus'
 import CreateMenu from '@/components/Menu/CreateMenu'
+import Signin from '@/components/User/Signin'
+import Signup from '@/components/User/Signup'
+import AuthGuard from './auth-guard'
 
 Vue.use(Router)
 
@@ -11,17 +14,30 @@ export default new Router({
     {
       path: '/',
       name: 'HelloWorld',
-      component: HelloWorld
+      component: HelloWorld,
+      beforeEnter: AuthGuard
     },
     {
       path: '/menus',
       name: 'Menus',
-      component: Menus
+      component: Menus,
+      beforeEnter: AuthGuard
     },
     {
       path: '/menu',
       name: 'CreateMenu',
-      component: CreateMenu
+      component: CreateMenu,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/signin',
+      name: 'Signin',
+      component: Signin
+    },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: Signup
     }
   ],
   mode: 'history'
