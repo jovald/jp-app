@@ -4,8 +4,8 @@
       <v-layout row>
         <v-flex  xs8>
           <div>
-            <div class="headline">{{ title }}</div>
-            <div class="sub-text indigo--text text--darken4">{{ value }}</div>
+            <div class="headline">{{ titulo }}</div>
+            <div class="sub-text indigo--text text--darken4">{{ fecha }}</div>
             <div class="sub-text indigo--text text--darken4">{{ tipo }}</div>
           </div>
         </v-flex>
@@ -29,7 +29,6 @@
           <v-btn v-on:click="addCounter" style="min-width:0" small flat><v-icon>keyboard_arrow_right</v-icon></v-btn>
         </v-flex>
 
-
       </v-layout>
     </v-container>
   </v-card>
@@ -43,10 +42,10 @@ export default {
 
   }),
   props: {
-    title: {
+    titulo: {
       type: String
     },
-    value: {
+    fecha: {
       type: String
     },
     tipo: {

@@ -9,15 +9,17 @@ export const store = new Vuex.Store({
     loadedMenus: [
       {
         id: '1',
-        almuerzo: { titulo: 'Lentejas', imagen: '/static/images/almuerzo.jpg', activo: true },
-        cena: { titulo: 'Pollo con arroz arabe', imagen: '/static/images/cena.jpg', activo: true },
-        fecha: '2018-2-20'
+        titulo: 'Caldito',
+        imagen: '/static/images/cena.jpg',
+        fecha: '2018-2-21',
+        tipo: 'cena'
       },
       {
         id: '2',
-        almuerzo: { titulo: 'Fideos con salsa', imagen: '/static/images/almuerzo.jpg', activo: false },
-        cena: { titulo: 'Caldito', imagen: '/static/images/cena.jpg', activo: false },
-        fecha: '2018-2-21'
+        titulo: 'Fideos con salsa',
+        imagen: '/static/images/almuerzo.jpg',
+        fecha: '2018-2-21',
+        tipo: 'almuerzo'
       }
     ],
     user: null,
