@@ -27,6 +27,11 @@ new Vue({
       projectId: 'jp-app-c58c6',
       storageBucket: 'jp-app-c58c6.appspot.com'
     })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user)
+      }
+    })
     this.$store.dispatch('loadMenus')
   }
 })
