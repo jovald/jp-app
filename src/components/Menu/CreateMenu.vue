@@ -1,8 +1,6 @@
 <template>
     <v-container fluid grid-list-lg>
       <v-layout wrap>
-
-
         <v-flex md4 xs12>
 
       <v-card>
@@ -87,7 +85,9 @@
         :headers="headers"
         :items="menus"
         class="elevation-1"
+        :loading="this.$store.getters.loading"
       >
+        <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
         <template slot="headerCell" slot-scope="props">
           <v-tooltip bottom>
             <span slot="activator">

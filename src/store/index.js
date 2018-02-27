@@ -6,25 +6,15 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    loadedMenus: [
-      {
-        id: '1',
-        titulo: 'Caldito',
-        fecha: '2018-2-21',
-        tipo: 'cena'
-      },
-      {
-        id: '2',
-        titulo: 'Fideos con salsa',
-        fecha: '2018-2-21',
-        tipo: 'almuerzo'
-      }
-    ],
+    loadedMenus: [],
     user: null,
     loading: false,
     error: null
   },
   mutations: {
+    setLoadedMenus (state, payload) {
+      state.loadedMenus = payload
+    },
     createMenu (state, payload) {
       state.loadedMenus.push(payload)
     },
@@ -45,15 +35,46 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
+    loadMenus ({commit}) {
+      commit('setLoading', true)
+      firebase.database().ref('menus').once('value')
+        .then((data) => {
+          const menus = []
+          const obj = data.val()
+          for (let key in obj) {
+            menus.push({
+              id: key,
+              titulo: obj[key].titulo,
+              tipo: obj[key].tipo,
+              fecha: obj[key].fecha
+            })
+          }
+          commit('setLoadedMenus', menus)
+          commit('setLoading', false)
+        })
+        .catch((error) => {
+          commit('setLoading', false)
+          console.log(error)
+        })
+    },
     createMenu ({commit}, payload) {
       const menu = {
-        id: 'adfa3edwd-23',
         fecha: payload.fecha,
         tipo: payload.tipo,
         titulo: payload.titulo
       }
+      firebase.database().ref('menus').push(menu)
+        .then((data) => {
+          const key = data.key
+          commit('createMenu', {
+            ...menu,
+            id: key
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
       // Reach to firebase and store it
-      commit('createMenu', menu)
     },
     deleteMenu ({commit}, payload) {
       commit('deleteMenu', payload)

@@ -27,5 +27,6 @@ new Vue({
       projectId: 'jp-app-c58c6',
       storageBucket: 'jp-app-c58c6.appspot.com'
     })
+    this.$store.dispatch('loadMenus')
   }
 })
