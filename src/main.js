@@ -21,11 +21,11 @@ new Vue({
   render: h => h(App),
   created () {
     firebase.initializeApp({
-      apiKey: 'AIzaSyDO2bwxeFUn3y7yWv4MUMKKUmu1Ig0rUqw',
-      authDomain: 'jp-app-c58c6.firebaseapp.com',
-      databaseURL: 'https://jp-app-c58c6.firebaseio.com',
-      projectId: 'jp-app-c58c6',
-      storageBucket: 'jp-app-c58c6.appspot.com'
+      apiKey: 'AIzaSyAGb5uJA9WNnmIm8TR5mx8CDYVHMU1qPyM',
+      authDomain: 'ripuariapp.firebaseapp.com',
+      databaseURL: 'https://ripuariapp.firebaseio.com',
+      projectId: 'ripuariapp',
+      storageBucket: 'ripuariapp.appspot.com'
     })
     this.$store.dispatch('loadMenus')
     firebase.auth().onAuthStateChanged((user) => {

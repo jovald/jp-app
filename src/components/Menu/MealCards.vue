@@ -12,7 +12,7 @@
 
         <v-flex xs4>
           <v-card-actions>
-            <v-btn v-on:click="pressed = !pressed; changeColor();" flat large><v-icon x-large>local_dining</v-icon></v-btn>
+            <v-btn v-on:click="pressed = !pressed; changeColor();" fab flat large><v-icon x-large>local_dining</v-icon></v-btn>
           </v-card-actions>
         </v-flex>
 
@@ -24,9 +24,9 @@
         </v-flex>
 
         <v-flex xs4>
-          <v-btn v-on:click="substractCounter" style="min-width:0" small flat><v-icon>keyboard_arrow_left</v-icon></v-btn>
+          <v-btn v-on:click="substractCounter" style="min-width:0" fab small flat><v-icon>keyboard_arrow_left</v-icon></v-btn>
           <p style="display: inline">{{ counter }}</p>
-          <v-btn v-on:click="addCounter" style="min-width:0" small flat><v-icon>keyboard_arrow_right</v-icon></v-btn>
+          <v-btn v-on:click="addCounter" style="min-width:0" fab small flat><v-icon>keyboard_arrow_right</v-icon></v-btn>
         </v-flex>
 
       </v-layout>
