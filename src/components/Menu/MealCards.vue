@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card :color="cardColor">
     <v-container fluid grid-list-lg>
       <v-layout row>
         <v-flex  xs8>
@@ -12,7 +12,7 @@
 
         <v-flex xs4>
           <v-card-actions>
-            <v-btn flat large><v-icon x-large> local_dining</v-icon></v-btn>
+            <v-btn v-on:click="pressed = !pressed; changeColor();" flat large><v-icon x-large>local_dining</v-icon></v-btn>
           </v-card-actions>
         </v-flex>
 
@@ -38,7 +38,9 @@
 export default {
   name: 'MealCard',
   data: () => ({
-    counter: 0
+    counter: 0,
+    pressed: false,
+    cardColor: ''
 
   }),
   props: {
@@ -53,6 +55,13 @@ export default {
     }
   },
   methods: {
+    changeColor: function () {
+      if (this.pressed === true) {
+        this.cardColor = 'green lighten-3'
+      } else {
+        this.cardColor = 'white'
+      }
+    },
     addCounter: function () {
       if (this.counter < 4) {
         this.counter++

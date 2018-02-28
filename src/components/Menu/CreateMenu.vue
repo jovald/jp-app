@@ -145,7 +145,7 @@
       cenaRules: [
         v => !!v || 'Debes ingresar una cena'
       ],
-      tipoComida: ['almuerzo', 'cena'],
+      tipoComida: ['Almuerzo', 'Cena'],
       headers: [
         {
           text: 'Titulo',
