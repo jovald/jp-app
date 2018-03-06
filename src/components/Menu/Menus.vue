@@ -3,8 +3,9 @@
   <v-container fluid grid-list-lg style="min-heigth:0">
     <v-progress-circular v-if="this.$store.getters.loading" class="progress" indeterminate :size="70" :width="7" color="indigo"></v-progress-circular>
 
+    <h3 class="headline mb-0 centeredText">Menú Semanal</h3>
     <v-layout row wrap>
-      <v-flex xs12 md6 v-for="menu in menus" :key="menu.id">
+      <v-flex  xs12 md6 v-for="menu in menus" :key="menu.id">
         <meal-card
           :tipo ="menu.tipo"
           :titulo="menu.titulo"
@@ -34,7 +35,9 @@
     },
     computed: {
       menus () {
-        return this.$store.getters.loadedMenus
+        return this.$store.getters.loadedMenus.sort(function (a,b){
+          return a.tipo.localeCompare(b.tipo) && (a.fecha).localeCompare(b.fecha)
+        })
       }
     },
     components: {
@@ -51,4 +54,11 @@
     opacity: 0.7;
     z-index: 2;
   }
+
+  .centeredText {
+    text-align: center;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+  }
+
 </style>

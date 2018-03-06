@@ -21,6 +21,7 @@
       <v-layout row>
         <v-flex xs8>
           <v-icon x-large>group_add</v-icon>
+          <div style="display: inline" class="sub-text indigo--text">Gäste</div>
         </v-flex>
 
         <v-flex xs4>
@@ -40,7 +41,9 @@ export default {
   data: () => ({
     counter: 0,
     pressed: false,
-    cardColor: ''
+    cardColor: '',
+    lunchColor: 'orange lighten-3',
+    dinnerColor: 'cyan accent-4'
 
   }),
   props: {
@@ -54,12 +57,24 @@ export default {
       type: String
     }
   },
+  created () {
+    if (this.tipo === 'Almuerzo'){
+      this.cardColor = this.lunchColor
+    } else {
+      this.cardColor = this.dinnerColor
+    }
+  },
+
   methods: {
     changeColor: function () {
       if (this.pressed === true) {
         this.cardColor = 'green lighten-3'
-      } else {
-        this.cardColor = 'white'
+      }
+      else if (this.tipo === 'Almuerzo') {
+        this.cardColor = this.lunchColor
+      }
+      else if (this.tipo === 'Cena') {
+        this.cardColor = this.dinnerColor
       }
     },
     addCounter: function () {

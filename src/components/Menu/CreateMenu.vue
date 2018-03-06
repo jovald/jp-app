@@ -53,7 +53,7 @@
                 :value="status"
                 transition="scale-transition"
               >
-                Debes ingresar una fecha valida
+                Debes ingresar una fecha válida
               </v-alert>
 
               <v-card-actions>
