@@ -36,7 +36,11 @@
     computed: {
       menus () {
         return this.$store.getters.loadedMenus.sort(function (a,b){
-          return a.tipo.localeCompare(b.tipo) && (a.fecha).localeCompare(b.fecha)
+          console.log(a.fecha.localeCompare(b.fecha))
+          if (a.fecha.localeCompare(b.fecha) === 0) {
+            console.log(a.tipo,b.tipo,a.tipo.localeCompare(b.tipo))
+            return a.tipo.localeCompare(b.tipo)
+          }
         })
       }
     },
