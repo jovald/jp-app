@@ -1,37 +1,28 @@
 <template>
   <v-card :color="cardColor">
-    <v-container fluid grid-list-lg>
-      <v-layout row>
-        <v-flex  xs8>
-          <div>
-            <div class="headline">{{ titulo }}</div>
-            <div class="sub-text indigo--text text--darken4">{{ fecha }}</div>
-            <div class="sub-text indigo--text text--darken4">{{ tipo }}</div>
-          </div>
-        </v-flex>
-
-        <v-flex xs4>
-          <v-card-actions>
-            <v-btn v-on:click="pressed = !pressed; changeColor();" fab flat large><v-icon x-large>local_dining</v-icon></v-btn>
-          </v-card-actions>
-        </v-flex>
-
-      </v-layout>
-
-      <v-layout row>
-        <v-flex xs8>
-          <v-icon x-large>group_add</v-icon>
-          <div style="display: inline" class="sub-text indigo--text">Gäste</div>
-        </v-flex>
-
-        <v-flex xs4>
-          <v-btn v-on:click="substractCounter" style="min-width:0" fab small flat><v-icon>keyboard_arrow_left</v-icon></v-btn>
-          <p style="display: inline">{{ counter }}</p>
-          <v-btn v-on:click="addCounter" style="min-width:0" fab small flat><v-icon>keyboard_arrow_right</v-icon></v-btn>
-        </v-flex>
-
-      </v-layout>
-    </v-container>
+    <v-card-media
+      :src="src1"
+      height="200px"
+    >
+      <v-container fill-height fluid>
+        <v-layout fill-height>
+          <v-flex xs12 align-end flexbox>
+            <div>
+              <div class="headline black--text">{{ titulo }}</div>
+              <div class="sub-text black--text text--darken4">{{ fecha }}</div>
+              <div class="sub-text black--text text--darken4">{{ tipo }}</div>
+            </div>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-card-media>
+    <v-card-actions>
+      <v-btn v-on:click="substractCounter" style="min-width:0" fab small flat><v-icon>keyboard_arrow_left</v-icon></v-btn>
+      <p style="display: inline">{{ counter }}</p>
+      <v-btn v-on:click="addCounter" style="min-width:0" fab small flat><v-icon>keyboard_arrow_right</v-icon></v-btn>
+      <v-spacer></v-spacer>
+      <v-btn v-on:click="pressed = !pressed; changeColor();" fab flat icon><v-icon x-large>local_dining</v-icon></v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -41,6 +32,7 @@ export default {
   data: () => ({
     counter: 0,
     pressed: false,
+    src1: '',
     cardColor: '',
     lunchColor: 'orange lighten-3',
     dinnerColor: 'cyan accent-4'
@@ -60,8 +52,10 @@ export default {
   created () {
     if (this.tipo === 'Almuerzo'){
       this.cardColor = this.lunchColor
+      this.src1 = './static/images/almuerzo.jpg'
     } else {
       this.cardColor = this.dinnerColor
+      this.src1 = './static/images/cena2.jpg'
     }
   },
 
