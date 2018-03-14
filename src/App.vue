@@ -69,7 +69,8 @@
     </v-content>
 
     <v-footer color="indigo" app>
-      <span class="white--text">&copy; 2017</span>
+      <v-spacer></v-spacer>
+      <span style="padding-right:10px"class="white--text">&copy; 2018 Burschenschaft Ripuaria</span>
     </v-footer>
   </v-app>
 </template>

@@ -8,20 +8,20 @@
         <v-layout fill-height>
           <v-flex xs12 align-end flexbox>
             <div>
-              <div class="headline black--text">{{ titulo }}</div>
-              <div class="sub-text black--text text--darken4">{{ fecha }}</div>
-              <div class="sub-text black--text text--darken4">{{ tipo }}</div>
+              <div class="display-3 outlineText">{{ titulo }}</div>
+              <div class="display-1 outlineText">{{ tipo }}</div>
+              <div class="display-1 outlineText">{{ fecha }}</div>
             </div>
           </v-flex>
         </v-layout>
       </v-container>
     </v-card-media>
     <v-card-actions>
-      <v-btn v-on:click="substractCounter" style="min-width:0" fab small flat><v-icon>keyboard_arrow_left</v-icon></v-btn>
+      <v-btn v-on:click="substractCounter" style="min-width:0" flat icon><v-icon>keyboard_arrow_left</v-icon></v-btn>
       <p style="display: inline">{{ counter }}</p>
-      <v-btn v-on:click="addCounter" style="min-width:0" fab small flat><v-icon>keyboard_arrow_right</v-icon></v-btn>
+      <v-btn v-on:click="addCounter" style="min-width:0" flat icon><v-icon>keyboard_arrow_right</v-icon></v-btn>
       <v-spacer></v-spacer>
-      <v-btn v-on:click="pressed = !pressed; changeColor();" fab flat icon><v-icon x-large>local_dining</v-icon></v-btn>
+      <v-btn v-on:click="pressed = !pressed; changeColor();" flat icon><v-icon x-large>local_dining</v-icon></v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -84,3 +84,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.outlineText {
+  color: black;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+</style>
