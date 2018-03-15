@@ -35,7 +35,7 @@
     },
     computed: {
       menus () {
-        return this.$store.getters.loadedMenus.sort(function (a,b){
+        return this.$store.getters.loadedMenus.sort(function (a, b) {
           if (a.fecha.localeCompare(b.fecha) === 0) {
             return a.tipo.localeCompare(b.tipo)
           }

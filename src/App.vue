@@ -8,8 +8,20 @@
       v-model="drawer"
       app
     >
+    <v-toolbar flat class="transparent">
+      <v-list class="pa-0">
+        <v-list-tile avatar>
+            <v-list-tile-avatar>
+              <img src="/static/images/wappen.png" >
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ showUsername }}</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+      </v-list>
+    </v-toolbar>
+    <v-divider></v-divider>
       <v-list dense>
-
         <v-list-tile v-for="item in menuItems" :key="item.title" :to="item.link">
           <v-list-tile-action>
             <v-icon> {{ item.icon }} </v-icon>
@@ -102,6 +114,13 @@
       },
       userIsAuthenticated () {
         return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+      },
+      showUsername () {
+        var name = this.$store.state.user.email.split('@')[0].split('.')[0]
+        name = name.charAt(0).toUpperCase() + name.slice(1)
+        var lastName = this.$store.state.user.email.split('@')[0].split('.')[1]
+        lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1)
+        return name + ' ' + lastName
       }
     },
     methods: {

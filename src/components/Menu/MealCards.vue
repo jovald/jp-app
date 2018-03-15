@@ -50,7 +50,7 @@ export default {
     }
   },
   created () {
-    if (this.tipo === 'Almuerzo'){
+    if (this.tipo === 'Almuerzo') {
       this.cardColor = this.lunchColor
       this.src1 = './static/images/almuerzo.jpg'
     } else {
@@ -63,11 +63,9 @@ export default {
     changeColor: function () {
       if (this.pressed === true) {
         this.cardColor = 'green lighten-3'
-      }
-      else if (this.tipo === 'Almuerzo') {
+      } else if (this.tipo === 'Almuerzo') {
         this.cardColor = this.lunchColor
-      }
-      else if (this.tipo === 'Cena') {
+      } else if (this.tipo === 'Cena') {
         this.cardColor = this.dinnerColor
       }
     },

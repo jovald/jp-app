@@ -100,6 +100,7 @@ export const store = new Vuex.Store({
             commit('setLoading', false)
             const newUser = {
               id: user.uid,
+              email: user.email,
               registeredMenus: []
             }
             commit('setUser', newUser)
@@ -120,8 +121,10 @@ export const store = new Vuex.Store({
         .then(
           user => {
             commit('setLoading', false)
+            console.log(user.email)
             const newUser = {
               id: user.uid,
+              email: user.email,
               registeredMenus: []
             }
             commit('setUser', newUser)
@@ -136,7 +139,7 @@ export const store = new Vuex.Store({
         )
     },
     autoSignIn ({commit}, payload) {
-      commit('setUser', { id: payload.uid, registeredMenus: [] })
+      commit('setUser', { id: payload.uid, email: payload.email, registeredMenus: [] })
     },
     logout ({commit}) {
       firebase.auth().signOut()
