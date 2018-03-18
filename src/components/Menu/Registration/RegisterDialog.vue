@@ -8,14 +8,14 @@
       <v-container>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-card-title v-if="userIsRegistered">Unregister from Menu?</v-card-title>
-            <v-card-title v-else>Register from Menu?</v-card-title>
+            <v-card-title class="headline" v-if="userIsRegistered">No almorzarás?</v-card-title>
+            <v-card-title class="headline" v-else>Almorzarás?</v-card-title>
           </v-flex>
         </v-layout>
         <v-divider></v-divider>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-card-text>You can always change your decision later on.</v-card-text>
+            <v-card-text>Siempre puedes cambiar tu decisión.</v-card-text>
           </v-flex>
         </v-layout>
         <v-layout>
@@ -24,11 +24,11 @@
               <v-btn
                 class="red--text darken-1"
                 flat
-                @click="registerDialog = false">Cancel</v-btn>
+                @click="registerDialog = false">Cancelar</v-btn>
               <v-btn
                 class="green--text darken-1"
                 flat
-                @click="onAgree(); registerDialog = false;" >Confirm</v-btn>
+                @click="onAgree(); registerDialog = false;" >Confirmar</v-btn>
             </v-card-actions>
           </v-flex>
         </v-layout>
