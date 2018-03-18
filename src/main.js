@@ -6,12 +6,14 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import { store } from './store'
 import AlertCmp from './components/Shared/Alert'
+import RegisterDialog from './components/Menu/Registration/RegisterDialog.vue'
 
 Vue.use(Vuetify)
 
 Vue.config.productionTip = false
 
 Vue.component('app-alert', AlertCmp)
+Vue.component('app-menu-register-dialog', RegisterDialog)
 
 /* eslint-disable no-new */
 new Vue({
@@ -31,6 +33,7 @@ new Vue({
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.dispatch('autoSignIn', user)
+        this.$store.dispatch('fetchUserData')
       }
     })
   }

@@ -10,6 +10,7 @@
           :tipo ="menu.tipo"
           :titulo="menu.titulo"
           :fecha="menu.fecha"
+          :id="menu.id"
           class="mb-2"
         ></meal-card>
       </v-flex>

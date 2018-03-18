@@ -21,7 +21,8 @@
       <p style="display: inline">{{ counter }}</p>
       <v-btn v-on:click="addCounter" style="min-width:0" flat icon><v-icon>keyboard_arrow_right</v-icon></v-btn>
       <v-spacer></v-spacer>
-      <v-btn v-on:click="pressed = !pressed; changeColor();" flat icon><v-icon x-large>local_dining</v-icon></v-btn>
+      <!-- <v-btn v-on:click="pressed = !pressed; changeColor();" flat icon><v-icon x-large>local_dining</v-icon></v-btn> -->
+      <app-menu-register-dialog :menuId="id"></app-menu-register-dialog>
     </v-card-actions>
   </v-card>
 </template>
@@ -46,6 +47,9 @@ export default {
       type: String
     },
     tipo: {
+      type: String
+    },
+    id: {
       type: String
     }
   },
