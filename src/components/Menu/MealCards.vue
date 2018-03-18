@@ -16,7 +16,7 @@
         </v-layout>
       </v-container>
     </v-card-media>
-    <v-card-actions>
+    <v-card-actions >
       <v-btn v-on:click="substractCounter" style="min-width:0" flat icon><v-icon>keyboard_arrow_left</v-icon></v-btn>
       <p style="display: inline">{{ counter }}</p>
       <v-btn v-on:click="addCounter" style="min-width:0" flat icon><v-icon>keyboard_arrow_right</v-icon></v-btn>
@@ -64,15 +64,6 @@ export default {
   },
 
   methods: {
-    changeColor: function () {
-      if (this.pressed === true) {
-        this.cardColor = 'green lighten-3'
-      } else if (this.tipo === 'Almuerzo') {
-        this.cardColor = this.lunchColor
-      } else if (this.tipo === 'Cena') {
-        this.cardColor = this.dinnerColor
-      }
-    },
     addCounter: function () {
       if (this.counter < 4) {
         this.counter++

@@ -1,8 +1,8 @@
 <template>
   <v-dialog width="350px" persistent v-model="registerDialog">
-    <v-btn flat accent slot="activator">
-      <v-icon v-if="!userIsRegistered">thumb_up</v-icon>
-      <v-icon v-else>thumb_down</v-icon>
+    <v-btn flat fab slot="activator">
+      <v-icon v-if="!userIsRegistered" color="red darken-1">thumb_up</v-icon>
+      <v-icon v-else color="green darken-1">thumb_down</v-icon>
     </v-btn>
     <v-card>
       <v-container>
