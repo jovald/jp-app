@@ -5,7 +5,9 @@ import Menus from '@/components/Menu/Menus'
 import CreateMenu from '@/components/Menu/CreateMenu'
 import Signin from '@/components/User/Signin'
 import Signup from '@/components/User/Signup'
+import CookMenus from '@/components/Menu/CookMenus'
 import AuthGuard from './auth-guard'
+
 
 Vue.use(Router)
 
@@ -30,6 +32,12 @@ export default new Router({
       beforeEnter: AuthGuard
     },
     {
+      path: '/cook',
+      name: 'CookMenus',
+      component: CookMenus,
+      beforeEnter: AuthGuard
+    },
+    {
       path: '/signin',
       name: 'Signin',
       component: Signin
@@ -39,6 +47,7 @@ export default new Router({
       name: 'Signup',
       component: Signup
     }
+
   ],
   mode: 'history'
 })

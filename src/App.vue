@@ -93,7 +93,8 @@
       drawer: null,
       menuItems: [
         { icon: 'featured_play_list', title: 'Menú Semanal', link: '/menus' },
-        { icon: 'work', title: 'Administrar Menús', link: '/menu' }
+        { icon: 'work', title: 'Administrar Menús', link: '/menu' },
+        { icon: 'local_dining', title: 'Menú para cocinar', link: '/cook'}
       ]
     }),
     props: {
