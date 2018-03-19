@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import lodash from 'lodash'
+import VueLodash from 'vue-lodash'
 import App from './App'
 import * as firebase from 'firebase'
 import router from './router'
@@ -9,6 +11,7 @@ import AlertCmp from './components/Shared/Alert'
 import RegisterDialog from './components/Menu/Registration/RegisterDialog.vue'
 
 Vue.use(Vuetify)
+Vue.use(VueLodash, lodash)
 
 Vue.config.productionTip = false
 
