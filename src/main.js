@@ -33,6 +33,7 @@ new Vue({
       storageBucket: 'ripuariapp.appspot.com'
     })
     this.$store.dispatch('loadMenus')
+    this.$store.dispatch('loadCookMenu')
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.dispatch('autoSignIn', user)

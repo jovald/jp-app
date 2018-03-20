@@ -11,6 +11,7 @@
           :titulo="menu.titulo"
           :fecha="menu.fecha"
           :id="menu.id"
+          :count="menu.count"
           class="mb-2"
         ></cook-card>
       </v-flex>
@@ -27,7 +28,7 @@
     }),
     computed: {
       menus () {
-        return this.$store.getters.loadedMenus.sort(function (a, b) {
+        return this.$store.getters.loadedCookMenus.sort(function (a, b) {
           if (a.fecha.localeCompare(b.fecha) === 0) {
             return a.tipo.localeCompare(b.tipo)
           }

@@ -18,7 +18,8 @@
     </v-card-media>
     <v-card-title>
       <div>
-        <div class="white--text">algo</div>
+        <div v-if="tipo === 'Cena'" class="headline white--text">Cantidad de personas que cenarán: {{ count }}</div>
+        <div v-else class="headline white--text">Cantidad de personas que almorzarán: {{ count }}</div>
       </div>
     </v-card-title>
   </v-card>
@@ -46,6 +47,9 @@ export default {
     },
     id: {
       type: String
+    },
+    count: {
+      type: Number
     }
   },
   created () {
