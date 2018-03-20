@@ -26,11 +26,11 @@ export const store = new Vuex.Store({
       registeredMenus.splice(registeredMenus.findIndex(menu => menu.id === payload), 1)
       Reflect.deleteProperty(state.user.fbKeys, payload)
     },
-    setPeopleEating (state, payload) {
-      state.peopleEating = payload
-    },
     setLoadedMenus (state, payload) {
       state.loadedMenus = payload
+    },
+    setPeopleEating (state, payload) {
+      state.peopleEating = payload
     },
     createMenu (state, payload) {
       state.loadedMenus.push(payload)
@@ -84,6 +84,28 @@ export const store = new Vuex.Store({
         commit('setLoading', false)
       })
     },
+    loadMenus ({commit}) {
+      commit('setLoading', true)
+      firebase.database().ref('menus').once('value')
+        .then((data) => {
+          const menus = []
+          const obj = data.val()
+          for (let key in obj) {
+            menus.push({
+              id: key,
+              titulo: obj[key].titulo,
+              tipo: obj[key].tipo,
+              fecha: obj[key].fecha
+            })
+          }
+          commit('setLoadedMenus', menus)
+          commit('setLoading', false)
+        })
+        .catch((error) => {
+          commit('setLoading', false)
+          console.log(error)
+        })
+    },
     loadCookMenu ({commit, getters}) {
       commit('setLoading', true)
       firebase.database().ref('users').once('value')
@@ -131,28 +153,6 @@ export const store = new Vuex.Store({
         commit('setLoading', false)
         console.log(error)
       })
-    },
-    loadMenus ({commit}) {
-      commit('setLoading', true)
-      firebase.database().ref('menus').once('value')
-        .then((data) => {
-          const menus = []
-          const obj = data.val()
-          for (let key in obj) {
-            menus.push({
-              id: key,
-              titulo: obj[key].titulo,
-              tipo: obj[key].tipo,
-              fecha: obj[key].fecha
-            })
-          }
-          commit('setLoadedMenus', menus)
-          commit('setLoading', false)
-        })
-        .catch((error) => {
-          commit('setLoading', false)
-          console.log(error)
-        })
     },
     createMenu ({commit}, payload) {
       commit('setLoading', true)
@@ -274,11 +274,6 @@ export const store = new Vuex.Store({
     }
   },
   getters: {
-    loadedCookMenus (state) {
-      return state.peopleEating.sort((menuA, menuB) => {
-        return menuA.fecha > menuB.fecha
-      })
-    },
     loadedMenus (state) {
       return state.loadedMenus.sort((menuA, menuB) => {
         return menuA.fecha > menuB.fecha
@@ -290,6 +285,11 @@ export const store = new Vuex.Store({
           return menu.id === menuId
         })
       }
+    },
+    loadedCookMenus (state) {
+      return state.peopleEating.sort((menuA, menuB) => {
+        return menuA.fecha > menuB.fecha
+      })
     },
     user (state) {
       return state.user

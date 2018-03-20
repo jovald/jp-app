@@ -26,6 +26,9 @@
   export default {
     data: () => ({
     }),
+    created () {
+      this.$store.dispatch('loadCookMenu')
+    },
     computed: {
       menus () {
         return this.$store.getters.loadedCookMenus.sort(function (a, b) {
