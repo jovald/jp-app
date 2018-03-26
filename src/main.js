@@ -32,7 +32,7 @@ new Vue({
       projectId: 'ripuariapp',
       storageBucket: 'ripuariapp.appspot.com'
     })
-    this.$store.dispatch('loadMenus')
+
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.dispatch('autoSignIn', user)

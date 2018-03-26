@@ -25,6 +25,9 @@
   export default {
     data: () => ({
     }),
+    created () {
+      this.$store.dispatch('loadMenus')
+    },
     methods: {
       cambiarEstadoMenu: function (comida) {
         if (comida.activo) {
